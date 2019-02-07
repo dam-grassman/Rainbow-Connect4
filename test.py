@@ -24,15 +24,14 @@ def test(args, T, dqn, val_mem, evaluate=False):
   #print('Init')
   # Test performance over several episodes
   done = True
-  print(T)
+
   for _ in range(args.evaluation_episodes):
     while True:
       if done:
         state, reward_sum, done = env.reset(), 0, False
         #print(state.shape)
-      #################### PAS SUR ICI ###################
 
-      action = dqn.act_e_greedy(state)  # Choose an action ε-greedily
+      action = dqn.act_e_greedy(state, epsilon=1)  # Choose an action ε-greedily
       state, reward, done = env.step(action)  # Step
       #print('STEP STEP')
       reward_sum += reward
@@ -61,6 +60,9 @@ def test(args, T, dqn, val_mem, evaluate=False):
     # Plot
     _plot_line(Ts, rewards, 'Reward', path='results')
     _plot_line(Ts, Qs, 'Q', path='results')
+    #print('Ts:',Ts)
+    #print('Reward:',rewards)
+    #print('Qs',Qs)
 
     # Save model parameters if improved
     if avg_reward > best_avg_reward:

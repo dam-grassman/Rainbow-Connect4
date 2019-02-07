@@ -85,7 +85,6 @@ class connect4Env(gym.Env):
         #print(self.game.winner, self.game.game_over)
         if self.game.winner == 1:
             #print('AGENT WON')
-            #return 1
             return 1
         elif self.game.winner == 2:
             #print('AGENT LOST')

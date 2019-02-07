@@ -45,7 +45,7 @@ class Agent():
       return (self.online_net(state.unsqueeze(0)) * self.support).sum(2).argmax(1).item()
 
   # Acts with an ε-greedy policy (used for evaluation only)
-  def act_e_greedy(self, state, epsilon=1):  # High ε can reduce evaluation scores drastically
+  def act_e_greedy(self, state, epsilon=0.001):  # High ε can reduce evaluation scores drastically
     eps = np.random.random()
     #if eps < epsilon:
     #	print('Acting Greedy')

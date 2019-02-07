@@ -89,7 +89,7 @@ class Env():
 
   def render(self):
     img = self.connect4._get_state(small=True)
-    img = boad_to_image(img,10)
+    img = board_to_image(img,10)
     for i in range(840):
       for j in range(840):
         if self.background[i,j,0] == 255 :
@@ -101,7 +101,7 @@ class Env():
   def close(self):
     cv2.destroyAllWindows()
 
-def boad_to_image(board, dim = 1):
+def board_to_image(board, dim = 1):
   img = np.zeros((84*dim,84*dim,3))
   #print(board.shape)
   for i in range(board.shape[0]):

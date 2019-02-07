@@ -19,7 +19,7 @@ parser.add_argument('--T-max', type=int, default=int(50e6), metavar='STEPS', hel
 parser.add_argument('--max-episode-length', type=int, default=int(108e3), metavar='LENGTH', help='Max episode length (0 to disable)')
 parser.add_argument('--history-length', type=int, default=1, metavar='T', help='Number of consecutive states processed')
 parser.add_argument('--hidden-size', type=int, default=512, metavar='SIZE', help='Network hidden size')
-parser.add_argument('--noisy-std', type=float, default=0.1, metavar='σ', help='Initial standard deviation of noisy linear layers')
+parser.add_argument('--noisy-std', type=float, default=0.5, metavar='σ', help='Initial standard deviation of noisy linear layers')
 parser.add_argument('--atoms', type=int, default=51, metavar='C', help='Discretised size of value distribution')
 parser.add_argument('--V-min', type=float, default=-10, metavar='V', help='Minimum of value distribution support')
 parser.add_argument('--V-max', type=float, default=10, metavar='V', help='Maximum of value distribution support')
@@ -38,8 +38,8 @@ parser.add_argument('--batch-size', type=int, default=32, metavar='SIZE', help='
 parser.add_argument('--learn-start', type=int, default=int(80e3), metavar='STEPS', help='Number of steps before starting training')
 parser.add_argument('--evaluate', action='store_true', help='Evaluate only')
 parser.add_argument('--evaluation-interval', type=int, default=100000, metavar='STEPS', help='Number of training steps between evaluations')
-parser.add_argument('--evaluation-episodes', type=int, default=10, metavar='N', help='Number of evaluation episodes to average over')
-parser.add_argument('--evaluation-size', type=int, default=500, metavar='N', help='Number of transitions to use for validating Q')
+parser.add_argument('--evaluation-episodes', type=int, default=100, metavar='N', help='Number of evaluation episodes to average over')
+parser.add_argument('--evaluation-size', type=int, default=50, metavar='N', help='Number of transitions to use for validating Q')
 parser.add_argument('--render', action='store_true', help='Display screen (testing only)')
 
 
@@ -76,8 +76,8 @@ mem = ReplayMemory(args, args.memory_capacity)
 priority_weight_increase = (1 - args.priority_weight) / (args.T_max - args.learn_start)
 
 #print(mem)
-epsilon=1
-print('ESPILON', epsilon)
+#epsilon=1
+#print('ESPILON', epsilon)
 # Construct validation memory
 val_mem = ReplayMemory(args, args.evaluation_size)
 T, done = 0, True
@@ -89,11 +89,11 @@ while T < args.evaluation_size:
   val_mem.append(state, None, None, done)
   state = next_state
   T += 1
-  if T>=20000 : 
-    epsilon=0.1
+  #if T>=20000 : 
+  #  epsilon=0.1
     #print('ESPILON', epsilon)
-  if T>=60000:
-    epsilon=0.05
+  #if T>=60000:
+  #  epsilon=0.05
 
 
 if args.evaluate:
@@ -113,7 +113,7 @@ else:
     if T % args.replay_frequency == 0:
       dqn.reset_noise()  # Draw a new set of noisy weights
 
-    action = dqn.act_e_greedy(state, epsilon)  # Choose an action greedily (with noisy weights)
+    action = dqn.act_e_greedy(state)  # Choose an action greedily (with noisy weights)
     next_state, reward, done = env.step(action)  # Step
     #print('reward_clip')
 
