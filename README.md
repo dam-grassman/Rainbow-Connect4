@@ -8,4 +8,6 @@ All the credits for the Rainbow part goes to this repository https://github.com/
 
 Using ```--render ``` flag during evaluation/training, one can see the agent (red) play against a simple AI (green).
 
-![Board](img/connect4.png)
+<p align="center">
+<img src="img/connect4.png" width="400" height="400">
+</p>
