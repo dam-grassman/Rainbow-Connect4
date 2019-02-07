@@ -18,7 +18,7 @@ Using ```--render ``` flag during evaluation/training, one can see the agent (re
 
 -  A (simple) AI that would play the role of the second player. Similarly to a Atari game like Pong for instance, the agent evolves in an environnent where he has to face another player. To this end, we defined a few simple rules to make the the opponent a bit harder to beat.
 
--  A Reward system. Several approaches can be debated but we choose the following ones: 
+-  A Reward system. Several approaches can be debated but we choose the following one: 
      - +1 if the agent wins
      - -1 f the agent loses
      - -1 if the agent chooses a forbidden action
