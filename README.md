@@ -12,7 +12,7 @@ Using ```--render ``` flag during evaluation/training, one can see the agent (re
 <img src="img/connect4.png" width="400" height="400">
 </p>
 
-### Three essential ingredient : 
+### Three essential ingredients : 
 
 - An adaptive graphical interface that would imitate the screen of an Atari Games. It may seems like too much effort as, but instead of a simple array of 7x7, we created a 84x84 pixel image representing a given state within the game. The goal is to make the agent learn a policy out of a screenshot of the agent at each step of the game.
 
